@@ -1,0 +1,62 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+bool isFibonacci(int n) {
+    return true;
+}
+
+int gcd(int a, int b) {
+    int min = a < b ? a : b;
+    for(int i = min; i >= 1; i--) {
+        if(a % i == 0 && b % i == 0) {
+            return i;
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    cout << "Enter the number: ";
+    cin >> n;
+    
+    int sumDigitSquares = 0;
+    int productDigits = 1;
+    
+    int sumEvenPlaceDigits = 0;
+    int sumOddPlaceDigits = 0;
+    
+    int digitCount = 0;
+    
+    int absoluteDiffLeftRight = 0;
+    
+    for(int i = n; i > 0; i/=10) {
+        int currLastDigit = i % 10;
+        sumDigitSquares+=(currLastDigit*currLastDigit);
+        productDigits*=(currLastDigit == 0 ? 1 : currLastDigit);
+        
+        if(((int)log10(n/i) + 1) % 2 == 0) {
+            sumEvenPlaceDigits += currLastDigit;
+        } else {
+            sumOddPlaceDigits += currLastDigit;
+        }
+        digitCount++;
+    }
+    
+    if(digitCount % 2 == 0) {
+        int leftSum = 0;
+        int rightSum = 0;
+        for(i = n/(int)pow(10, digitCount); i > 0; i/=10) {
+            leftSum += i%10;
+        }
+        for(i = n; i > n/(int)pow(10, digitCount); i/=10) {
+            rightSum += i%10;
+        }
+    } else {
+        
+    }
+    
+    cout << sumDigitSquares << " " << productDigits << " " << sumEvenPlaceDigits << " " << sumOddPlaceDigits;
+}
